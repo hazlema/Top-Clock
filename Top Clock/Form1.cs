@@ -86,7 +86,13 @@ namespace Top_Clock {
 
                 topClock.Text = $"{time[0]}:{time[1]} {display[1].ToLower()}";
             } else {
-                topClock.Text = $"{DateTime.Now.ToLongDateString()}";
+                string dow = DateTime.Now.Day.ToString();
+                string suffix = "th";
+                if (dow == "1") suffix = "st";
+                if (dow == "2") suffix = "nd";
+                if (dow == "3") suffix = "rd";
+
+                topClock.Text = DateTime.Now.ToString("ddd, MMM") + " " + dow + suffix;
             }
         }
 
