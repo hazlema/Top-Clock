@@ -28,12 +28,18 @@ namespace Top_Clock {
             hoverUnlock.Tick += borderOn;
         }
 
+        // Registry Magic
+        //
         private bool keyExists(RegistryKey root, string name) {
-            foreach (string look in root.GetSubKeyNames()) {
+            foreach (string look in root.GetSubKeyNames())
                 if (name == look) return true;
-            }
 
             return false;
+        }
+
+        private bool isFirstRun() {
+            RegistryKey Software = Registry.CurrentUser.OpenSubKey("Software");
+            return !keyExists(Software, "TopClock");
         }
 
         private void regSaveValues() {
@@ -43,8 +49,6 @@ namespace Top_Clock {
                 Software.CreateSubKey("TopClock");
 
             RegistryKey appkey = Software.OpenSubKey("TopClock", true);
-
-            appkey.SetValue("FirstRun", "false");
             appkey.SetValue("Font", topClock.FontFamily);
             appkey.SetValue("Width", this.Width);
             appkey.SetValue("Hight", this.Height);
@@ -70,13 +74,6 @@ namespace Top_Clock {
             Software.Close();
         }
 
-        // Check to see if first run 
-        // 
-        private bool isFirstRun() {
-            RegistryKey Software = Registry.CurrentUser.OpenSubKey("Software");
-            return !keyExists(Software, "TopClock");
-        }
-
         // Update the displayed data
         //
         private void formatData() {
@@ -91,6 +88,10 @@ namespace Top_Clock {
                 if (dow == "1") suffix = "st";
                 if (dow == "2") suffix = "nd";
                 if (dow == "3") suffix = "rd";
+                if (dow == "21") suffix = "st";
+                if (dow == "22") suffix = "nd";
+                if (dow == "23") suffix = "rd";
+                if (dow == "31") suffix = "st";
 
                 topClock.Text = DateTime.Now.ToString("ddd, MMM") + " " + dow + suffix;
             }
@@ -115,11 +116,7 @@ namespace Top_Clock {
             timer.Stop();
             topClock.fadeOut();
 
-            if (dataType == DataEnum.Time)
-                dataType = DataEnum.Date;
-            else
-                dataType = DataEnum.Time;
-
+            if (dataType == DataEnum.Time) dataType = DataEnum.Date; else dataType = DataEnum.Time;
             formatData();
 
             topClock.fadeIn(125);
@@ -138,10 +135,18 @@ namespace Top_Clock {
         // Turn down opacity
         //
         private void onMouseLeave(object sender, EventArgs e) {
-            hoverUnlock.Enabled = false;
-            topClock.Opacity = 125;
             mouseEntered = false;
-            this.Opacity = .50D;
+            hoverUnlock.Enabled = false;
+
+            // FadeOut Effect
+            //
+            System.Threading.Thread.Sleep(500);
+            for (decimal fadeOut = 0.9M; this.Opacity >= .5d; fadeOut--) {
+                this.Opacity -= .05d;
+                System.Threading.Thread.Sleep(50);
+            }
+
+            topClock.Opacity = 125;
         }
 
         // Rerender
@@ -172,19 +177,8 @@ namespace Top_Clock {
             this.FormBorderStyle = FormBorderStyle.Sizable;
         }
 
-        private void onLoad(object sender, EventArgs e) {
-            if (isFirstRun()) {
-                regSaveValues();
-                MessageBox.Show("Welcome to TopClock!\n\nThis message will only display ONCE!\n\n" +
-                                "To show the window border hover over the time\n" +
-                                "To hide the border click on a different window\n" +
-                                "To cycle random colors for visibility, hover over the window\n" +
-                                "To change text size, resize the window (Turn on borders first)", "Top Clock: First Run Message");
-            } else {
-                regLoadValues();
-            }
-        }
-
+        // Mouse Stuff
+        //
         private void topClock_MouseClick(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Right) {
                 topClock.setFont(DirectionEnum.Next);
@@ -193,6 +187,22 @@ namespace Top_Clock {
                 onClick(sender, e);
             else if (e.Button == MouseButtons.Middle)
                 onToggleBorder(sender, e);
+
+            hoverUnlock.Enabled = false;
+        }
+
+        private void onLoad(object sender, EventArgs e) {
+            if (isFirstRun()) {
+                regSaveValues();
+                MessageBox.Show("Welcome to TopClock!\n\nThis message will only display ONCE!\n\n" +
+                                "* To show the window border hover over the time\n" +
+                                "* To hide the border click on a different window\n" +
+                                "* To cycle random colors for visibility, hover over the window\n" +
+                                "* To change text size, resize the window (Turn on borders first)\n" +
+                                "* To change the font right click on the time\n" +
+                                "* To activate the border manually, middle click on the time\n", "Top Clock: First Run Message");
+            } else 
+                regLoadValues();
         }
     }
 }

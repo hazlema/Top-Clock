@@ -24,47 +24,9 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.topClock = new Top_Clock.TopClock();
             ((System.ComponentModel.ISupportInitialize)(this.topClock)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(5, 100);
-            this.panel1.TabIndex = 2;
-            // 
-            // panel2
-            // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(195, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(5, 100);
-            this.panel2.TabIndex = 3;
-            // 
-            // panel3
-            // 
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(5, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(190, 5);
-            this.panel3.TabIndex = 5;
-            // 
-            // panel4
-            // 
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(5, 95);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(190, 5);
-            this.panel4.TabIndex = 6;
             // 
             // topClock
             // 
@@ -74,11 +36,11 @@
             this.topClock.FontFamily = "Microsoft YaHei Light";
             this.topClock.Foreground = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.topClock.Image = ((System.Drawing.Image)(resources.GetObject("topClock.Image")));
-            this.topClock.Location = new System.Drawing.Point(5, 5);
+            this.topClock.Location = new System.Drawing.Point(0, 0);
             this.topClock.Margin = new System.Windows.Forms.Padding(2);
             this.topClock.Name = "topClock";
             this.topClock.Opacity = 125;
-            this.topClock.Size = new System.Drawing.Size(190, 90);
+            this.topClock.Size = new System.Drawing.Size(200, 75);
             this.topClock.TabIndex = 1;
             this.topClock.TabStop = false;
             this.topClock.Text = "Loading";
@@ -88,21 +50,17 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(3F, 8F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(200, 100);
+            this.ClientSize = new System.Drawing.Size(200, 75);
             this.Controls.Add(this.topClock);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Adobe Arabic", 5.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(200, 100);
+            this.MinimumSize = new System.Drawing.Size(200, 75);
             this.Name = "Form1";
             this.Opacity = 0.5D;
             this.ShowInTaskbar = false;
@@ -120,10 +78,6 @@
 
         #endregion
         private TopClock topClock;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel4;
     }
 }
 
