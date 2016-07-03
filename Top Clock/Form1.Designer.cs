@@ -37,10 +37,10 @@
             this.topClock.Foreground = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.topClock.Image = ((System.Drawing.Image)(resources.GetObject("topClock.Image")));
             this.topClock.Location = new System.Drawing.Point(0, 0);
-            this.topClock.Margin = new System.Windows.Forms.Padding(2);
+            this.topClock.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.topClock.Name = "topClock";
             this.topClock.Opacity = 125;
-            this.topClock.Size = new System.Drawing.Size(200, 75);
+            this.topClock.Size = new System.Drawing.Size(200, 50);
             this.topClock.TabIndex = 1;
             this.topClock.TabStop = false;
             this.topClock.Text = "Loading";
@@ -52,19 +52,21 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(200, 75);
+            this.ClientSize = new System.Drawing.Size(200, 50);
             this.Controls.Add(this.topClock);
             this.Font = new System.Drawing.Font("Adobe Arabic", 5.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(200, 75);
+            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.MinimumSize = new System.Drawing.Size(200, 50);
             this.Name = "Form1";
             this.Opacity = 0.5D;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Top Clock";
             this.TopMost = true;
             this.Deactivate += new System.EventHandler(this.onFormDeactivate);

@@ -51,7 +51,7 @@ namespace Top_Clock {
             RegistryKey appkey = Software.OpenSubKey("TopClock", true);
             appkey.SetValue("Font", topClock.FontFamily);
             appkey.SetValue("Width", this.Width);
-            appkey.SetValue("Hight", this.Height);
+            appkey.SetValue("Height", this.Height);
             appkey.SetValue("X", this.Location.X);
             appkey.SetValue("Y", this.Location.Y);
 
@@ -66,7 +66,7 @@ namespace Top_Clock {
                 RegistryKey appkey = Software.OpenSubKey("TopClock", true);
                 topClock.FontFamily = appkey.GetValue("Font").ToString();
                 this.Width = (int)appkey.GetValue("Width");
-                this.Height = (int)appkey.GetValue("Hight");
+                this.Height = (int)appkey.GetValue("Height");
                 this.Location = new Point((int)appkey.GetValue("X"), (int)appkey.GetValue("Y"));
                 appkey.Close();
             }
@@ -194,13 +194,14 @@ namespace Top_Clock {
         private void onLoad(object sender, EventArgs e) {
             if (isFirstRun()) {
                 regSaveValues();
-                MessageBox.Show("Welcome to TopClock!\n\nThis message will only display ONCE!\n\n" +
+                MessageBox.Show(this, "Welcome to TopClock!\n\nThis message will only display ONCE!\n\n" +
                                 "* To show the window border hover over the time\n" +
                                 "* To hide the border click on a different window\n" +
                                 "* To cycle random colors for visibility, hover over the window\n" +
                                 "* To change text size, resize the window (Turn on borders first)\n" +
                                 "* To change the font right click on the time\n" +
                                 "* To activate the border manually, middle click on the time\n", "Top Clock: First Run Message");
+                this.FormBorderStyle = FormBorderStyle.Sizable;
             } else 
                 regLoadValues();
         }
