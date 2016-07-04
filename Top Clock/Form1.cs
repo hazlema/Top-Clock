@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using System.Diagnostics;
 
 namespace Top_Clock {
+
     public partial class Form1 : Form {
         bool        mouseEntered   = false;
         Color       savedColor     = Color.Silver;
@@ -27,6 +28,11 @@ namespace Top_Clock {
             hoverUnlock.Interval = 2000;
             hoverUnlock.Tick += borderOn;
         }
+
+        // Better stay on top
+        //
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
 
         // Registry Magic
         //
@@ -192,6 +198,8 @@ namespace Top_Clock {
         }
 
         private void onLoad(object sender, EventArgs e) {
+            SetForegroundWindow(this.Handle);
+
             if (isFirstRun()) {
                 regSaveValues();
                 MessageBox.Show(this, "Welcome to TopClock!\n\nThis message will only display ONCE!\n\n" +
