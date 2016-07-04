@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.ComponentModel;
 using System.Drawing.Text;
+using System.Diagnostics;
 
 namespace Top_Clock {
     public class TopClock : PictureBox {
@@ -21,8 +22,8 @@ namespace Top_Clock {
             using (InstalledFontCollection fonts = new InstalledFontCollection()) {
                 // Find Current Index
                 //
-                for (int fntCount = 0; fntCount <= fonts.Families.Length-1; fntCount++) {
-                    if (fonts.Families[fntCount].Name == font)
+                for (int fntCount = 0; fntCount <= fonts.Families.Length - 1; fntCount++) {
+                    if (fonts.Families[fntCount].Name == FontFamily)
                         fntIndex = fntCount;
                 }
 
@@ -35,11 +36,12 @@ namespace Top_Clock {
                 if (nextNDX > fonts.Families.Length - 1) nextNDX = 0;
 
                 if (direction == DirectionEnum.Next)
-                    font = fonts.Families[nextNDX].Name;
+                    FontFamily = fonts.Families[nextNDX].Name;
                 else
-                    font = fonts.Families[prevNDX].Name;
+                    FontFamily = fonts.Families[prevNDX].Name;
             }
 
+            Debug.WriteLine($"FontFamily: {this.FontFamily}");
             render();
         }
     
@@ -67,7 +69,7 @@ namespace Top_Clock {
 
             // Render String
             //
-            fnt = new Font(FontName, fntSize);
+            fnt = new Font(FontFamily, fntSize);
             sze = gfx.MeasureString(Text, fnt);
             int offsetX = (this.Width - (int)sze.Width) / 2;
             int offsetY = (this.Height - (int)sze.Height) / 2;
@@ -102,26 +104,37 @@ namespace Top_Clock {
         // Rerender control
         //
         public void render() {
-            renderFont(Text, font, new SolidBrush(Color.FromArgb(Opacity, Foreground.R, Foreground.G, Foreground.B)));
+            renderFont(Text, FontFamily, new SolidBrush(Color.FromArgb(Opacity, Foreground.R, Foreground.G, Foreground.B)));
             this.Refresh();
         }
 
         // Private properties
         //
         private string text = "";
-        private string font = "Microsoft YaHei Light";
+
+        // Returns a valid font from the list if none found returns Verdana
+        //
+        private string fnt = FontHelper.findValidFont(new string[] {
+            "Microsoft YaHei Light",
+            "Myriad Pro Light",
+            "Miriam",
+            "Segoe UI Emoji",
+            "Sitka Banner",
+            "Nirmala UI"
+        });
+
         private Color foreground = Color.FromArgb(125, 125, 125, 125);
         private int opacity = 125;
 
         // Public properties
         //
-        [Browsable(true)]
+        [Browsable(false)]
         public string FontFamily {
             get {
-                return font;
+                return fnt;
             }
             set {
-                font = value;
+                fnt = value;
                 render();
             }
         }

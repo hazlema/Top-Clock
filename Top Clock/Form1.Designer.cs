@@ -33,7 +33,6 @@
             this.topClock.BackColor = System.Drawing.Color.Transparent;
             this.topClock.Cursor = System.Windows.Forms.Cursors.Hand;
             this.topClock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.topClock.FontFamily = "Microsoft YaHei Light";
             this.topClock.Foreground = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.topClock.Image = ((System.Drawing.Image)(resources.GetObject("topClock.Image")));
             this.topClock.Location = new System.Drawing.Point(0, 0);
